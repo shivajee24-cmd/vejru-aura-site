@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Preloader } from "@/components/Preloader";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
+import { Projects } from "@/components/Projects";
+import { Testimonials } from "@/components/Testimonials";
+import { WhyChooseUs } from "@/components/WhyChooseUs";
+import { About } from "@/components/About";
+import { FAQ } from "@/components/FAQ";
+import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
@@ -17,14 +23,33 @@ const Index = () => {
 
       {!isLoading && (
         <div className="relative min-h-screen">
-          {/* Theme toggle button */}
-          <div className="fixed top-6 right-6 z-50">
-            <ThemeToggle />
-          </div>
+          <Navigation />
+          
+          <main className="pt-16">
+            <div id="home">
+              <Hero />
+            </div>
+            <div id="services">
+              <Services />
+            </div>
+            <div id="projects">
+              <Projects />
+            </div>
+            <Testimonials />
+            <div id="why-us">
+              <WhyChooseUs />
+            </div>
+            <div id="about">
+              <About />
+            </div>
+            <div id="faq">
+              <FAQ />
+            </div>
+            <div id="contact">
+              <Contact />
+            </div>
+          </main>
 
-          {/* Main content */}
-          <Hero />
-          <Services />
           <Footer />
         </div>
       )}

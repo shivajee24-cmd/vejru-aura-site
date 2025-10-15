@@ -35,11 +35,20 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex flex-wrap gap-4 justify-center"
         >
-          <Button size="lg" className="bg-gradient-primary glow group">
+          <Button
+            size="lg"
+            className="bg-gradient-primary glow group"
+            onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
+          >
             Explore Our Services
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
-          <Button size="lg" variant="outline" className="group">
+          <Button
+            size="lg"
+            variant="outline"
+            className="group"
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+          >
             Get In Touch
           </Button>
         </motion.div>
