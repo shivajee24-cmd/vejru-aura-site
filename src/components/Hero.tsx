@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Code, Smartphone, Cpu, Lightbulb, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
+import logo from "@/assets/vejru-logo.png";
 
 export const Hero = () => {
   return (
@@ -37,27 +39,147 @@ export const Hero = () => {
       </div>
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
+        {/* Logo with animated tech categories */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center mb-12"
+        >
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 1, type: "spring", bounce: 0.4 }}
+            className="mb-8"
+          >
+            <div className="relative">
+              <img 
+                src={logo} 
+                alt="Vejru Logo" 
+                className="h-24 w-24 drop-shadow-2xl"
+              />
+              <motion.div
+                className="absolute inset-0 blur-2xl opacity-60"
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.4, 0.7, 0.4]
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <div className="h-24 w-24 bg-gradient-primary rounded-full" />
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Technology categories in circular layout */}
+          <div className="relative h-64 w-full max-w-2xl mb-8">
+            {[
+              { icon: Code, label: "Web Design", angle: 0, color: "hsl(262 83% 58%)" },
+              { icon: Smartphone, label: "Applications", angle: 90, color: "hsl(190 95% 50%)" },
+              { icon: Cpu, label: "Software", angle: 180, color: "hsl(280 100% 70%)" },
+              { icon: Lightbulb, label: "AI Solutions", angle: 270, color: "hsl(170 100% 50%)" }
+            ].map((tech, i) => {
+              const Icon = tech.icon;
+              const radius = 120;
+              const x = Math.cos((tech.angle * Math.PI) / 180) * radius;
+              const y = Math.sin((tech.angle * Math.PI) / 180) * radius;
+              
+              return (
+                <motion.div
+                  key={tech.label}
+                  initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+                  animate={{ 
+                    opacity: 1, 
+                    scale: 1,
+                    x,
+                    y
+                  }}
+                  transition={{
+                    delay: 0.8 + i * 0.15,
+                    duration: 0.6,
+                    type: "spring"
+                  }}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                >
+                  <motion.div
+                    animate={{
+                      y: [0, -10, 0],
+                      rotate: [0, 5, 0, -5, 0]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      delay: i * 0.5
+                    }}
+                    className="flex flex-col items-center gap-2 bg-card/80 backdrop-blur-md border-2 border-border/50 rounded-2xl p-4 shadow-xl hover:border-primary/50 transition-all hover:shadow-2xl group"
+                  >
+                    <div className="relative">
+                      <Icon className="h-8 w-8 text-primary group-hover:scale-110 transition-transform" />
+                      <motion.div
+                        className="absolute inset-0 blur-lg opacity-50"
+                        animate={{
+                          scale: [1, 1.5, 1],
+                          opacity: [0.3, 0.6, 0.3]
+                        }}
+                        transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                      >
+                        <Icon className="h-8 w-8" style={{ color: tech.color }} />
+                      </motion.div>
+                    </div>
+                    <span className="text-xs font-semibold whitespace-nowrap text-foreground">
+                      {tech.label}
+                    </span>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+            
+            {/* Center connecting lines */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+              {[0, 90, 180, 270].map((angle, i) => {
+                const x1 = "50%";
+                const y1 = "50%";
+                const radius = 120;
+                const x2 = `calc(50% + ${Math.cos((angle * Math.PI) / 180) * radius}px)`;
+                const y2 = `calc(50% + ${Math.sin((angle * Math.PI) / 180) * radius}px)`;
+                
+                return (
+                  <motion.line
+                    key={i}
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                    stroke="url(#techGradient)"
+                    strokeWidth="2"
+                    strokeDasharray="4 4"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 0.3 }}
+                    transition={{ delay: 1.2 + i * 0.1, duration: 0.8 }}
+                  />
+                );
+              })}
+              <defs>
+                <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="hsl(262 83% 58%)" />
+                  <stop offset="100%" stopColor="hsl(190 95% 50%)" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <Badge className="bg-primary/10 text-primary border-primary/20 px-6 py-2 text-sm backdrop-blur-sm">
+            <Sparkles className="h-4 w-4 mr-2" />
+            Pioneering Digital Innovation
+          </Badge>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className="mb-8"
         >
-          {/* Premium floating badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-primary/10 backdrop-blur-sm border border-primary/20 mb-8"
-          >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              className="h-2 w-2 rounded-full bg-accent"
-            />
-            <span className="text-sm font-medium text-primary">Pioneering Digital Innovation</span>
-          </motion.div>
-
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 relative">
             <motion.span 
               className="text-gradient animate-gradient inline-block"
