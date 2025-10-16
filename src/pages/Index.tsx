@@ -11,6 +11,7 @@ import { About } from "@/components/About";
 import { FAQ } from "@/components/FAQ";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { Pricing } from "@/components/Pricing";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +40,7 @@ const Index = () => {
             <div id="why-us">
               <WhyChooseUs />
             </div>
+            <Pricing />
             <div id="about">
               <About />
             </div>
