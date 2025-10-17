@@ -61,19 +61,19 @@ export const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "hello@vejru.com",
-      link: "mailto:hello@vejru.com",
+      value: "vejru.com@gmail.com",
+      link: "mailto:vejru.com@gmail.com",
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
+      value: "N/A",
+      link: "",
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "San Francisco, CA",
+      value: "IISER BHOPAL MP,India",
       link: "#",
     },
   ];
