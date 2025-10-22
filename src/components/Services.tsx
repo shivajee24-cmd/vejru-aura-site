@@ -98,39 +98,66 @@ export const Services = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
             >
-              <Card className="group relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm p-6 h-full transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_40px_rgba(168,85,247,0.25)] hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+              <Card className="group relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm p-6 h-full transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_50px_rgba(168,85,247,0.3)] hover:-translate-y-2 hover:scale-[1.02]">
+                {/* Rotating gradient border */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100"
-                  animate={{
-                    rotate: [0, 360],
-                  }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-                
-                {/* Animated border */}
-                <motion.div
-                  className="absolute inset-0 rounded-lg"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"
                   style={{
-                    background: "linear-gradient(90deg, hsl(262 83% 58%), hsl(190 95% 50%), hsl(262 83% 58%))",
-                    padding: "1px",
-                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    maskComposite: "exclude",
+                    background: "conic-gradient(from 0deg, hsl(262 83% 58%), hsl(190 95% 50%), hsl(280 100% 70%), hsl(262 83% 58%))",
                   }}
                   animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                    rotate: 360,
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 4,
                     repeat: Infinity,
-                    ease: "linear",
+                    ease: "linear"
+                  }}
+                >
+                  <div className="absolute inset-[2px] bg-background rounded-lg" />
+                </motion.div>
+
+                {/* Pulsing gradient orb */}
+                <motion.div
+                  className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-0 group-hover:opacity-100 blur-2xl"
+                  style={{
+                    background: `radial-gradient(circle, hsl(262 83% 58% / 0.6), transparent)`,
+                  }}
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0, 0.6, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
                   }}
                 />
+
+                {/* Sparkle effect */}
+                <motion.div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100"
+                  initial={false}
+                >
+                  {[...Array(6)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 rounded-full bg-white"
+                      style={{
+                        left: `${20 + i * 15}%`,
+                        top: `${30 + (i % 2) * 40}%`,
+                      }}
+                      animate={{
+                        scale: [0, 1, 0],
+                        opacity: [0, 1, 0],
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                      }}
+                    />
+                  ))}
+                </motion.div>
                 
                 <div className="relative z-10">
                   <div className="flex items-start justify-between mb-4">

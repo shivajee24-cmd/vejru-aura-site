@@ -30,52 +30,104 @@ export const Hero = () => {
           <rect width="100%" height="100%" fill="url(#circuit-grid)" />
         </svg>
 
-        {/* Animated circuit paths */}
+        {/* Animated circuit paths with traveling particles */}
         <svg className="absolute inset-0 w-full h-full">
-          {[...Array(8)].map((_, i) => (
-            <motion.path
-              key={i}
-              d={`M ${i * 200},0 L ${i * 200},${100 + i * 50} L ${200 + i * 150},${100 + i * 50} L ${200 + i * 150},${300 + i * 100}`}
-              stroke="url(#circuit-gradient)"
-              strokeWidth="2"
-              fill="none"
-              strokeDasharray="10 5"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ 
-                pathLength: [0, 1, 0],
-                opacity: [0, 0.6, 0]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                delay: i * 0.5,
-                ease: "linear"
-              }}
-            />
-          ))}
+          {[...Array(8)].map((_, i) => {
+            const pathId = `circuit-path-${i}`;
+            const pathD = `M ${i * 200},0 L ${i * 200},${100 + i * 50} L ${200 + i * 150},${100 + i * 50} L ${200 + i * 150},${300 + i * 100}`;
+            
+            return (
+              <g key={i}>
+                {/* Static path */}
+                <path
+                  id={pathId}
+                  d={pathD}
+                  stroke="url(#circuit-gradient)"
+                  strokeWidth="1"
+                  fill="none"
+                  opacity="0.3"
+                />
+                
+                {/* Animated glow on path */}
+                <motion.path
+                  d={pathD}
+                  stroke="url(#circuit-gradient)"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeDasharray="10 5"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ 
+                    pathLength: [0, 1, 0],
+                    opacity: [0, 0.8, 0]
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    delay: i * 0.5,
+                    ease: "linear"
+                  }}
+                />
+                
+                {/* Multiple particles traveling along path */}
+                {[...Array(3)].map((_, particleIndex) => (
+                  <motion.circle
+                    key={`particle-${i}-${particleIndex}`}
+                    r="3"
+                    fill={particleIndex % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)"}
+                    filter="url(#glow)"
+                    initial={{ offsetDistance: "0%", opacity: 0 }}
+                    animate={{ 
+                      offsetDistance: ["0%", "100%"],
+                      opacity: [0, 1, 1, 0]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: i * 0.5 + particleIndex * 1,
+                      ease: "linear"
+                    }}
+                    style={{
+                      offsetPath: `path('${pathD}')`,
+                    }}
+                  />
+                ))}
+              </g>
+            );
+          })}
+          
+          {/* Glow filter for particles */}
+          <defs>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
         </svg>
 
-        {/* Traveling particles */}
-        {[...Array(20)].map((_, i) => (
+        {/* Random floating particles for ambient effect */}
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 rounded-full"
+            className="absolute w-1 h-1 rounded-full"
             style={{
               background: i % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)",
-              boxShadow: `0 0 10px ${i % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)"}`,
+              boxShadow: `0 0 8px ${i % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)"}`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              x: [0, Math.random() * 400 - 200],
-              y: [0, Math.random() * 400 - 200],
-              opacity: [0, 1, 0],
-              scale: [0, 1.5, 0]
+              x: [0, Math.random() * 300 - 150],
+              y: [0, Math.random() * 300 - 150],
+              opacity: [0, 0.8, 0],
+              scale: [0, 2, 0]
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 4 + Math.random() * 2,
               repeat: Infinity,
-              delay: i * 0.2,
+              delay: i * 0.3,
               ease: "easeInOut"
             }}
           />

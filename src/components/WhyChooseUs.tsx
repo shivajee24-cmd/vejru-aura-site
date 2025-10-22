@@ -68,20 +68,36 @@ export const WhyChooseUs = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 p-8 h-full hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(168,85,247,0.25)] hover:-translate-y-2">
-                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                
-                {/* Animated gradient orb */}
+              <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 p-8 h-full hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_50px_rgba(168,85,247,0.3)] hover:-translate-y-2 hover:scale-[1.05]">
+                {/* Animated flowing gradient */}
                 <motion.div
-                  className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-gradient-accent opacity-0 group-hover:opacity-20 blur-3xl"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100"
                   animate={{
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 180, 360],
+                    background: [
+                      "linear-gradient(45deg, transparent, rgba(168, 85, 247, 0.1), transparent)",
+                      "linear-gradient(45deg, transparent, rgba(6, 182, 212, 0.1), transparent)",
+                      "linear-gradient(45deg, transparent, rgba(168, 85, 247, 0.1), transparent)",
+                    ],
                   }}
                   transition={{
-                    duration: 8,
+                    duration: 3,
                     repeat: Infinity,
-                    ease: "easeInOut",
+                  }}
+                />
+
+                {/* Pulsing glow orb */}
+                <motion.div
+                  className="absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-0 group-hover:opacity-100"
+                  style={{
+                    background: "radial-gradient(circle, hsl(262 83% 58% / 0.3), transparent)",
+                  }}
+                  animate={{
+                    scale: [1, 1.4, 1],
+                    opacity: [0, 0.6, 0],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
                   }}
                 />
                 

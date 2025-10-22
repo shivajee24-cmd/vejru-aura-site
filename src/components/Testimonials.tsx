@@ -98,8 +98,37 @@ export const Testimonials = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="flex-[0_0_90%] md:flex-[0_0_45%] lg:flex-[0_0_45%] min-w-0"
                 >
-                  <Card className="relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 p-8 h-full hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]">
-                    <Quote className="absolute top-4 right-4 h-12 w-12 text-primary/10" />
+                  <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 p-8 h-full hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(168,85,247,0.25)] hover:scale-[1.02]">
+                    {/* Animated quote icon */}
+                    <motion.div
+                      className="absolute top-4 right-4"
+                      animate={{
+                        scale: [1, 1.1, 1],
+                        rotate: [0, 5, 0, -5, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                      }}
+                    >
+                      <Quote className="h-12 w-12 text-primary/10 group-hover:text-primary/20 transition-colors" />
+                    </motion.div>
+
+                    {/* Gradient shimmer effect */}
+                    <motion.div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100"
+                      style={{
+                        background: "linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.1), transparent)",
+                      }}
+                      animate={{
+                        x: ["-100%", "200%"],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatDelay: 1,
+                      }}
+                    />
                     
                     <div className="flex gap-1 mb-4">
                       {[...Array(testimonial.rating)].map((_, i) => (

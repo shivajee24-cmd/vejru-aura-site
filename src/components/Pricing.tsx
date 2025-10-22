@@ -150,13 +150,57 @@ export const Pricing = () => {
                   )}
                   
                   <Card 
-                    className={`relative overflow-hidden p-8 h-full transition-all duration-300 ${
+                    className={`group relative overflow-hidden p-8 h-full transition-all duration-500 ${
                       plan.popular 
-                        ? 'border-primary/50 shadow-[0_0_50px_rgba(168,85,247,0.25)] scale-105' 
-                        : 'border-border/50 hover:border-primary/30 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]'
+                        ? 'border-primary/50 shadow-[0_0_50px_rgba(168,85,247,0.3)] scale-105' 
+                        : 'border-border/50 hover:border-primary/30 hover:shadow-[0_0_40px_rgba(168,85,247,0.2)] hover:scale-[1.02]'
                     }`}
                   >
-                    <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+                    {/* Animated corner accents */}
+                    <motion.div
+                      className="absolute top-0 left-0 w-20 h-20 opacity-0 group-hover:opacity-100"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 90, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                      }}
+                    >
+                      <div className="absolute top-0 left-0 w-full h-full border-t-2 border-l-2 border-primary/50 rounded-tl-xl" />
+                    </motion.div>
+                    
+                    <motion.div
+                      className="absolute bottom-0 right-0 w-20 h-20 opacity-0 group-hover:opacity-100"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        rotate: [0, -90, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        delay: 0.5,
+                      }}
+                    >
+                      <div className="absolute bottom-0 right-0 w-full h-full border-b-2 border-r-2 border-accent/50 rounded-br-xl" />
+                    </motion.div>
+
+                    {/* Pulsing gradient background */}
+                    <motion.div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-5"
+                      animate={{
+                        background: [
+                          "radial-gradient(circle at 0% 0%, hsl(262 83% 58% / 0.3), transparent)",
+                          "radial-gradient(circle at 100% 100%, hsl(190 95% 50% / 0.3), transparent)",
+                          "radial-gradient(circle at 0% 0%, hsl(262 83% 58% / 0.3), transparent)",
+                        ],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                      }}
+                    />
                     
                     <div className="relative z-10">
                       <div className="mb-6">

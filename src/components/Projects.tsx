@@ -62,31 +62,34 @@ export const Projects = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 p-8 h-full hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_50px_rgba(168,85,247,0.3)] hover:scale-[1.02]">
-                <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
-                
-                {/* Animated shine effect */}
+              <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 p-8 h-full hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_60px_rgba(168,85,247,0.35)] hover:scale-[1.08]">
+                {/* Dynamic shine sweep */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100"
+                  style={{
+                    background: "linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent)",
+                  }}
                   animate={{
                     x: ["-100%", "200%"],
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 1.5,
                     repeat: Infinity,
                     repeatDelay: 2,
-                    ease: "easeInOut",
                   }}
                 />
-                
-                {/* Corner accent */}
+
+                {/* Expanding gradient corners */}
                 <motion.div
-                  className="absolute top-0 right-0 w-20 h-20 bg-gradient-primary opacity-0 group-hover:opacity-30 blur-xl"
+                  className="absolute top-0 right-0 w-20 h-20 opacity-30 group-hover:opacity-60"
+                  style={{
+                    background: "radial-gradient(circle at top right, hsl(262 83% 58%), transparent)",
+                  }}
                   animate={{
-                    scale: [1, 1.5, 1],
+                    scale: [1, 2, 1],
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 3,
                     repeat: Infinity,
                   }}
                 />
