@@ -98,8 +98,39 @@ export const Services = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
             >
-              <Card className="group relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm p-6 h-full transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]">
-                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+              <Card className="group relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm p-6 h-full transition-all duration-500 hover:border-primary/50 hover:shadow-[0_0_40px_rgba(168,85,247,0.25)] hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20 opacity-0 group-hover:opacity-100"
+                  animate={{
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
+                
+                {/* Animated border */}
+                <motion.div
+                  className="absolute inset-0 rounded-lg"
+                  style={{
+                    background: "linear-gradient(90deg, hsl(262 83% 58%), hsl(190 95% 50%), hsl(262 83% 58%))",
+                    padding: "1px",
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                />
                 
                 <div className="relative z-10">
                   <div className="flex items-start justify-between mb-4">

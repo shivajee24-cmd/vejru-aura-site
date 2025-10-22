@@ -7,35 +7,102 @@ import logo from "@/assets/vejru-logo.png";
 export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
-      {/* Premium animated background */}
+      {/* Circuit board animated background */}
       <div className="absolute inset-0 -z-10">
-        {/* Gradient orbs */}
-        <div className="absolute top-20 left-10 h-96 w-96 rounded-full bg-primary/30 blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-10 h-96 w-96 rounded-full bg-accent/30 blur-3xl animate-float" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-gradient-primary opacity-20 blur-3xl animate-float" style={{ animationDelay: "4s" }} />
+        {/* Gradient base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-accent/5" />
         
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(168,85,247,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(168,85,247,0.05)_1px,transparent_1px)] bg-[size:64px_64px]" />
-        
-        {/* Animated lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-20">
-          <motion.path
-            d="M0,100 Q400,50 800,100 T1600,100"
-            stroke="url(#gradient-line)"
-            strokeWidth="2"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          />
+        {/* Circuit board grid */}
+        <svg className="absolute inset-0 w-full h-full opacity-30">
           <defs>
-            <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="0%">
+            <pattern id="circuit-grid" width="100" height="100" patternUnits="userSpaceOnUse">
+              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="hsl(262 83% 58%)" strokeWidth="0.5" opacity="0.3"/>
+              <circle cx="0" cy="0" r="2" fill="hsl(262 83% 58%)" opacity="0.5"/>
+              <circle cx="100" cy="0" r="2" fill="hsl(190 95% 50%)" opacity="0.5"/>
+              <circle cx="0" cy="100" r="2" fill="hsl(190 95% 50%)" opacity="0.5"/>
+            </pattern>
+            <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="hsl(262 83% 58%)" />
               <stop offset="50%" stopColor="hsl(190 95% 50%)" />
-              <stop offset="100%" stopColor="hsl(262 83% 58%)" />
+              <stop offset="100%" stopColor="hsl(230 85% 65%)" />
             </linearGradient>
           </defs>
+          <rect width="100%" height="100%" fill="url(#circuit-grid)" />
         </svg>
+
+        {/* Animated circuit paths */}
+        <svg className="absolute inset-0 w-full h-full">
+          {[...Array(8)].map((_, i) => (
+            <motion.path
+              key={i}
+              d={`M ${i * 200},0 L ${i * 200},${100 + i * 50} L ${200 + i * 150},${100 + i * 50} L ${200 + i * 150},${300 + i * 100}`}
+              stroke="url(#circuit-gradient)"
+              strokeWidth="2"
+              fill="none"
+              strokeDasharray="10 5"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ 
+                pathLength: [0, 1, 0],
+                opacity: [0, 0.6, 0]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                delay: i * 0.5,
+                ease: "linear"
+              }}
+            />
+          ))}
+        </svg>
+
+        {/* Traveling particles */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 rounded-full"
+            style={{
+              background: i % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)",
+              boxShadow: `0 0 10px ${i % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)"}`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              x: [0, Math.random() * 400 - 200],
+              y: [0, Math.random() * 400 - 200],
+              opacity: [0, 1, 0],
+              scale: [0, 1.5, 0]
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: i * 0.2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+
+        {/* Glowing nodes */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={`node-${i}`}
+            className="absolute w-3 h-3 rounded-full"
+            style={{
+              background: "hsl(262 83% 58%)",
+              boxShadow: "0 0 20px hsl(262 83% 58%)",
+              left: `${5 + (i * 7)}%`,
+              top: `${10 + (i * 5)}%`,
+            }}
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: i * 0.3,
+            }}
+          />
+        ))}
       </div>
 
       <div className="max-w-7xl mx-auto text-center relative z-10">

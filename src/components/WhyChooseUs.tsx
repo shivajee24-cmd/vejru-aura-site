@@ -68,8 +68,22 @@ export const WhyChooseUs = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 p-8 h-full hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]">
-                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+              <Card className="group relative overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 p-8 h-full hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(168,85,247,0.25)] hover:-translate-y-2">
+                <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                
+                {/* Animated gradient orb */}
+                <motion.div
+                  className="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-gradient-accent opacity-0 group-hover:opacity-20 blur-3xl"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 180, 360],
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
                 
                 <div className="relative z-10">
                   <div className="mb-4 inline-flex p-3 rounded-xl bg-gradient-accent/10 group-hover:scale-110 transition-transform duration-300">
