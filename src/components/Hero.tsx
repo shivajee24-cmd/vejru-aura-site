@@ -7,163 +7,99 @@ import logo from "@/assets/vejru-logo.png";
 export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
-      {/* Quantum computer animated background */}
+      {/* Circuit board animated background */}
       <div className="absolute inset-0 -z-10">
-        {/* Multi-layer gradient base with quantum glow */}
+        {/* Gradient base */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-accent/5" />
-        <motion.div 
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-accent/10"
-          animate={{
-            opacity: [0.3, 0.6, 0.3],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
         
-        {/* Quantum wave interference patterns */}
-        <svg className="absolute inset-0 w-full h-full opacity-20">
+        {/* Circuit board grid */}
+        <svg className="absolute inset-0 w-full h-full opacity-30">
           <defs>
-            <pattern id="quantum-waves" width="200" height="200" patternUnits="userSpaceOnUse">
-              {[...Array(4)].map((_, i) => (
-                <motion.circle
-                  key={i}
-                  cx="100"
-                  cy="100"
-                  r={20 + i * 30}
-                  fill="none"
-                  stroke="url(#quantum-gradient)"
-                  strokeWidth="1"
-                  opacity={0.6 - i * 0.15}
-                  initial={{ r: 20 + i * 30 }}
-                  animate={{ r: [20 + i * 30, 40 + i * 30, 20 + i * 30] }}
-                  transition={{ duration: 4, repeat: Infinity, delay: i * 0.5 }}
-                />
-              ))}
+            <pattern id="circuit-grid" width="100" height="100" patternUnits="userSpaceOnUse">
+              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="hsl(262 83% 58%)" strokeWidth="0.5" opacity="0.3"/>
+              <circle cx="0" cy="0" r="2" fill="hsl(262 83% 58%)" opacity="0.5"/>
+              <circle cx="100" cy="0" r="2" fill="hsl(190 95% 50%)" opacity="0.5"/>
+              <circle cx="0" cy="100" r="2" fill="hsl(190 95% 50%)" opacity="0.5"/>
             </pattern>
-            <radialGradient id="quantum-gradient">
+            <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="hsl(262 83% 58%)" />
               <stop offset="50%" stopColor="hsl(190 95% 50%)" />
-              <stop offset="100%" stopColor="hsl(280 100% 70%)" />
-            </radialGradient>
+              <stop offset="100%" stopColor="hsl(230 85% 65%)" />
+            </linearGradient>
           </defs>
-          <rect width="100%" height="100%" fill="url(#quantum-waves)" />
+          <rect width="100%" height="100%" fill="url(#circuit-grid)" />
         </svg>
 
-        {/* Quantum circuit grid with nodes */}
-        <svg className="absolute inset-0 w-full h-full opacity-25">
-          <defs>
-            <pattern id="quantum-grid" width="120" height="120" patternUnits="userSpaceOnUse">
-              {/* Horizontal and vertical quantum lines */}
-              <path d="M 0 60 L 120 60 M 60 0 L 60 120" fill="none" stroke="hsl(262 83% 58%)" strokeWidth="0.5" opacity="0.4"/>
-              {/* Quantum gates (squares) */}
-              <rect x="50" y="50" width="20" height="20" fill="none" stroke="hsl(190 95% 50%)" strokeWidth="1" opacity="0.6"/>
-              {/* Connection nodes */}
-              <circle cx="60" cy="60" r="3" fill="hsl(262 83% 58%)" opacity="0.8">
-                <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
-              </circle>
-              <circle cx="0" cy="0" r="2" fill="hsl(190 95% 50%)" opacity="0.6"/>
-              <circle cx="120" cy="120" r="2" fill="hsl(280 100% 70%)" opacity="0.6"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#quantum-grid)" />
-        </svg>
-
-        {/* Quantum entanglement paths with advanced particles */}
+        {/* Animated circuit paths with traveling particles */}
         <svg className="absolute inset-0 w-full h-full">
-          {[...Array(12)].map((_, i) => {
-            const pathId = `quantum-path-${i}`;
-            const startX = (i % 4) * 300;
-            const startY = Math.floor(i / 4) * 300;
-            const pathD = `M ${startX},${startY} Q ${startX + 150},${startY + 100} ${startX + 300},${startY + 200} T ${startX + 450},${startY + 400}`;
+          {[...Array(8)].map((_, i) => {
+            const pathId = `circuit-path-${i}`;
+            const pathD = `M ${i * 200},0 L ${i * 200},${100 + i * 50} L ${200 + i * 150},${100 + i * 50} L ${200 + i * 150},${300 + i * 100}`;
             
             return (
               <g key={i}>
-                {/* Static quantum path */}
+                {/* Static path */}
                 <path
                   id={pathId}
                   d={pathD}
-                  stroke="url(#quantum-gradient)"
+                  stroke="url(#circuit-gradient)"
                   strokeWidth="1"
                   fill="none"
-                  opacity="0.2"
+                  opacity="0.3"
                 />
                 
-                {/* Pulsing energy wave on path */}
+                {/* Animated glow on path */}
                 <motion.path
                   d={pathD}
-                  stroke="url(#quantum-gradient)"
-                  strokeWidth="3"
+                  stroke="url(#circuit-gradient)"
+                  strokeWidth="2"
                   fill="none"
-                  strokeDasharray="20 10"
+                  strokeDasharray="10 5"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={{ 
                     pathLength: [0, 1, 0],
-                    opacity: [0, 1, 0]
+                    opacity: [0, 0.8, 0]
                   }}
                   transition={{
-                    duration: 5,
+                    duration: 4,
                     repeat: Infinity,
-                    delay: i * 0.4,
-                    ease: "easeInOut"
+                    delay: i * 0.5,
+                    ease: "linear"
                   }}
                 />
                 
-                {/* Multiple quantum particles with entanglement effect */}
-                {[...Array(4)].map((_, particleIndex) => (
-                  <motion.g key={`particle-${i}-${particleIndex}`}>
-                    <motion.circle
-                      r="4"
-                      fill={particleIndex % 3 === 0 ? "hsl(262 83% 58%)" : particleIndex % 3 === 1 ? "hsl(190 95% 50%)" : "hsl(280 100% 70%)"}
-                      filter="url(#quantum-glow)"
-                      initial={{ offsetDistance: "0%", opacity: 0 }}
-                      animate={{ 
-                        offsetDistance: ["0%", "100%"],
-                        opacity: [0, 1, 1, 0],
-                        scale: [0.8, 1.2, 0.8]
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        delay: i * 0.4 + particleIndex * 0.8,
-                        ease: "linear"
-                      }}
-                      style={{
-                        offsetPath: `path('${pathD}')`,
-                      }}
-                    />
-                    {/* Quantum trail */}
-                    <motion.circle
-                      r="2"
-                      fill={particleIndex % 3 === 0 ? "hsl(262 83% 58%)" : particleIndex % 3 === 1 ? "hsl(190 95% 50%)" : "hsl(280 100% 70%)"}
-                      opacity="0.4"
-                      initial={{ offsetDistance: "0%", opacity: 0 }}
-                      animate={{ 
-                        offsetDistance: ["0%", "100%"],
-                        opacity: [0, 0.6, 0]
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        delay: i * 0.4 + particleIndex * 0.8 + 0.2,
-                        ease: "linear"
-                      }}
-                      style={{
-                        offsetPath: `path('${pathD}')`,
-                      }}
-                    />
-                  </motion.g>
+                {/* Multiple particles traveling along path */}
+                {[...Array(3)].map((_, particleIndex) => (
+                  <motion.circle
+                    key={`particle-${i}-${particleIndex}`}
+                    r="3"
+                    fill={particleIndex % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)"}
+                    filter="url(#glow)"
+                    initial={{ offsetDistance: "0%", opacity: 0 }}
+                    animate={{ 
+                      offsetDistance: ["0%", "100%"],
+                      opacity: [0, 1, 1, 0]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: i * 0.5 + particleIndex * 1,
+                      ease: "linear"
+                    }}
+                    style={{
+                      offsetPath: `path('${pathD}')`,
+                    }}
+                  />
                 ))}
               </g>
             );
           })}
           
-          {/* Enhanced quantum glow filter */}
+          {/* Glow filter for particles */}
           <defs>
-            <filter id="quantum-glow" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-              <feGaussianBlur stdDeviation="8" result="coloredBlur2"/>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
               <feMerge>
-                <feMergeNode in="coloredBlur2"/>
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
@@ -171,103 +107,54 @@ export const Hero = () => {
           </defs>
         </svg>
 
-        {/* Quantum probability clouds - floating particles */}
-        {[...Array(25)].map((_, i) => (
+        {/* Random floating particles for ambient effect */}
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute rounded-full"
+            className="absolute w-1 h-1 rounded-full"
             style={{
-              width: `${4 + Math.random() * 4}px`,
-              height: `${4 + Math.random() * 4}px`,
-              background: i % 3 === 0 ? "hsl(262 83% 58%)" : i % 3 === 1 ? "hsl(190 95% 50%)" : "hsl(280 100% 70%)",
-              boxShadow: `0 0 ${12 + Math.random() * 8}px ${i % 3 === 0 ? "hsl(262 83% 58%)" : i % 3 === 1 ? "hsl(190 95% 50%)" : "hsl(280 100% 70%)"}`,
+              background: i % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)",
+              boxShadow: `0 0 8px ${i % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)"}`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              x: [0, (Math.random() - 0.5) * 400],
-              y: [0, (Math.random() - 0.5) * 400],
-              opacity: [0, 0.9, 0],
-              scale: [0, 1.5, 0]
+              x: [0, Math.random() * 300 - 150],
+              y: [0, Math.random() * 300 - 150],
+              opacity: [0, 0.8, 0],
+              scale: [0, 2, 0]
             }}
             transition={{
-              duration: 5 + Math.random() * 3,
+              duration: 4 + Math.random() * 2,
               repeat: Infinity,
-              delay: i * 0.2,
+              delay: i * 0.3,
               ease: "easeInOut"
             }}
           />
         ))}
 
-        {/* Quantum gates/nodes with superposition */}
-        {[...Array(20)].map((_, i) => (
+        {/* Glowing nodes */}
+        {[...Array(15)].map((_, i) => (
           <motion.div
-            key={`qgate-${i}`}
-            className="absolute rounded-lg"
+            key={`node-${i}`}
+            className="absolute w-3 h-3 rounded-full"
             style={{
-              width: i % 2 === 0 ? "12px" : "16px",
-              height: i % 2 === 0 ? "12px" : "16px",
-              background: i % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)",
-              boxShadow: `0 0 30px ${i % 2 === 0 ? "hsl(262 83% 58%)" : "hsl(190 95% 50%)"}`,
-              left: `${8 + (i * 5)}%`,
-              top: `${15 + (i * 4)}%`,
-              border: "1px solid rgba(255, 255, 255, 0.2)",
+              background: "hsl(262 83% 58%)",
+              boxShadow: "0 0 20px hsl(262 83% 58%)",
+              left: `${5 + (i * 7)}%`,
+              top: `${10 + (i * 5)}%`,
             }}
             animate={{
-              scale: [1, 1.6, 1],
-              opacity: [0.4, 1, 0.4],
-              rotate: [0, 180, 360]
+              scale: [1, 1.5, 1],
+              opacity: [0.5, 1, 0.5],
             }}
             transition={{
-              duration: 3,
+              duration: 2,
               repeat: Infinity,
-              delay: i * 0.25,
+              delay: i * 0.3,
             }}
-          >
-            {/* Inner quantum state */}
-            <motion.div
-              className="absolute inset-1 rounded-sm"
-              style={{
-                background: i % 2 === 0 ? "hsl(190 95% 50%)" : "hsl(262 83% 58%)",
-              }}
-              animate={{
-                scale: [1, 0, 1],
-                opacity: [1, 0, 1]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: i * 0.25 + 0.5,
-              }}
-            />
-          </motion.div>
+          />
         ))}
-
-        {/* Quantum entanglement connections */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
-          {[...Array(8)].map((_, i) => (
-            <motion.line
-              key={`entangle-${i}`}
-              x1={`${10 + i * 12}%`}
-              y1="20%"
-              x2={`${15 + i * 12}%`}
-              y2="80%"
-              stroke="url(#quantum-gradient)"
-              strokeWidth="1"
-              strokeDasharray="5 5"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ 
-                pathLength: [0, 1, 0],
-                opacity: [0, 0.6, 0]
-              }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity,
-                delay: i * 0.3
-              }}
-            />
-          ))}
-        </svg>
       </div>
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
